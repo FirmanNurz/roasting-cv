@@ -1,3 +1,6 @@
-import { GlobalWorkerOptions, version } from 'pdfjs-dist';
+import { GlobalWorkerOptions } from "pdfjs-dist";
+import pdfjsWorker from "pdfjs-dist/build/pdf.worker?url";
 
-GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${version}/pdf.worker.min.js`;
+// GlobalWorkerOptions.workerSrc = "/node_modules/pdfjs-dist/build/pdf.worker.min.js";
+// Set the worker globally
+GlobalWorkerOptions.workerSrc = pdfjsWorker;

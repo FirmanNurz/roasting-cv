@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { detectTextFromImage } from "../utils/textDetection";
+// import { detectTextFromImage } from "../utils/textDetection";
 
-interface ImageTextDetectorProps {
+interface OCRProcessorProps {
   file?: File;
 }
 
-export default function ImageTextDetector({ file }: ImageTextDetectorProps) {
-  const [detectedText, setDetectedText] = useState<string>("");
+export default function OCRProcessor({ file }: OCRProcessorProps) {
+  const [text, setText] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -16,10 +16,10 @@ export default function ImageTextDetector({ file }: ImageTextDetectorProps) {
     const processImage = async () => {
       setIsLoading(true);
       setError(null);
-      
+
       try {
-        const text = await detectTextFromImage(file);
-        setDetectedText(text);
+        // const extractedText = await detectTextFromImage(file);
+        // setText(extractedText);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Failed to process image");
         console.error("OCR Error:", err);
@@ -39,17 +39,13 @@ export default function ImageTextDetector({ file }: ImageTextDetectorProps) {
           <span className="ml-2">Processing image...</span>
         </div>
       )}
-      {error && (
-        <div className="text-red-500 p-4 border border-red-200 rounded">
-          {error}
-        </div>
-      )}
-      {detectedText && !isLoading && (
+
+      {error && <div className="text-red-500 p-4 border border-red-200 rounded">{error}</div>}
+
+      {text && !isLoading && (
         <div className="space-y-4">
           <h3 className="font-bold text-lg">Extracted Text:</h3>
-          <pre className="whitespace-pre-wrap bg-gray-50 p-4 rounded border">
-            {detectedText}
-          </pre>
+          <pre className="whitespace-pre-wrap bg-gray-50 p-4 rounded border">{text}</pre>
         </div>
       )}
     </div>

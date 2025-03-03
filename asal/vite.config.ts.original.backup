@@ -1,0 +1,26 @@
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import { resolve } from "path";
+
+export default defineConfig({
+  plugins: [react()],
+  optimizeDeps: {
+    include: ["pdfjs-dist"],
+  },
+  server: {
+    headers: {
+      "Cross-Origin-Embedder-Policy": "require-corp",
+      "Cross-Origin-Opener-Policy": "same-origin",
+    },
+  },
+  build: {
+    commonjsOptions: {
+      include: [/pdfjs-dist/],
+    },
+  },
+  resolve: {
+    alias: {
+      "pdf.worker": resolve(__dirname, "node_modules/pdfjs-dist/build/pdf.worker.min.js"),
+    },
+  },
+});

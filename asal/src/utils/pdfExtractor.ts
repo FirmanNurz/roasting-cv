@@ -1,4 +1,6 @@
+// import "./pdfjs-config";
 import { getDocument } from "pdfjs-dist";
+import { pdfWorker } from "./pdf-worker";
 
 export async function extractTextFromPdf(file: File): Promise<string> {
   const reader = new FileReader();
@@ -8,7 +10,10 @@ export async function extractTextFromPdf(file: File): Promise<string> {
     reader.onload = async () => {
       try {
         const arrayBuffer = reader.result as ArrayBuffer;
-        const pdf = await getDocument({ data: arrayBuffer }).promise;
+        const pdf = await getDocument({
+          data: arrayBuffer,
+          worker: pdfWorker,
+        }).promise;
         let extractedText = "";
 
         for (let i = 1; i <= pdf.numPages; i++) {

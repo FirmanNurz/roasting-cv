@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router";
 import Navbar from "./pages/Navbar";
 import UploadCV from "./pages/UploadCV";
 
@@ -33,7 +33,7 @@ function App() {
             bottom: 0,
           }}
         >
-          <p>© 2023 Roasting CV. All rights reserved.</p>
+          <p>© 2025 Roasting CV. All rights reserved.</p>
         </footer>
       </div>
     </Router>
